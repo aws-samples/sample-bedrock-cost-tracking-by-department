@@ -10,11 +10,13 @@ DEPARTMENT_PROFILES = {
     'IT': 'arn:aws:bedrock:us-east-1:111122223333:application-inference-profile/ghi789',
 }
 
-# Implement based on your authentication system.
+# Determine the user's department from your application's authentication layer.
 # Examples:
-#   - Extract from SAML/OIDC claims: token['custom:department']
-#   - Query from user database: db.get_user_department(user_id)
-#   - Retrieve from session: session['department']
+#   - An OIDC/SAML claim from your app login: token['custom:department']
+#   - A lookup in your user database: db.get_user_department(user_id)
+#   - A value stored in the user's session: session['department']
+# The application then calls Amazon Bedrock using its own IAM role;
+# individual user identities are not passed to AWS.
 department = get_department_from_user_session()
 
 if department not in DEPARTMENT_PROFILES:
