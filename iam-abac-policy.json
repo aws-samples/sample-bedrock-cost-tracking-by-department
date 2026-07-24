@@ -1,16 +1,15 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "bedrock:InvokeModel",
-      "bedrock:InvokeModelWithResponseStream"
-    ],
-    "Resource": "arn:aws:bedrock:us-east-1:111122223333:application-inference-profile/*",
-    "Condition": {
-      "StringEquals": {
-        "aws:ResourceTag/Team": "${aws:PrincipalTag/Team}"
-      }
-    }
-  }]
+    "Version": "2012-10-17",
+    "Statement": [{
+        "Sid": "InvokeDepartmentInferenceProfiles",
+        "Effect": "Allow",
+        "Action": [
+            "bedrock:InvokeModel",
+            "bedrock:InvokeModelWithResponseStream"
+        ],
+        "Resource": [
+            "arn:aws:bedrock:us-east-1:111122223333:application-inference-profile/*",
+            "arn:aws:bedrock:us-east-1::foundation-model/<your-in-region-model-id>"
+        ]
+    }]
 }
